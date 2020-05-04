@@ -25,7 +25,6 @@
     "stylelint:fix": "stylelint src/*.{css,scss,sass} --fix",
     "eslint": "eslint  src/*.{js,jsx}",
     "eslint:fix": "eslint  src/*.{js,jsx} --fix",
-    "eslint:fix:layout": "eslint  src/*.{js,jsx} --fix --fix-type layout",
     "lint": "npm run eslint & npm run stylelint",
     "lint:fix": "npm run eslint:fix & npm run stylelint:fix"
   },
@@ -73,7 +72,7 @@
       "git add"
     ],
     "src/**/*.{js,jsx}": [
-      "eslint --fix --fix-type layout",
+      "eslint --fix",
       "git add"
     ],
     "src/**/*.{css,scss,sass,less}": [

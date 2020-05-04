@@ -8,42 +8,40 @@ import Countdown from './components/Countdown';
 
 const { TabPane } = Tabs;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Timer bla</h1>
-      </header>
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h1>Timer bla</h1>
+    </header>
 
-      <Tabs defaultActiveKey="2">
-        <TabPane
-          tab={(
-            <span>
-              <ClockCircleOutlined />
-              Timer
-            </span>
-          )}
-          key="1"
-        >
-          <h2>Timer</h2>
-          <Timer />
-        </TabPane>
-        <TabPane
-          tab={(
-            <span>
-              <RocketOutlined />
-              Countdown
-            </span>
-          )}
-          key="2"
-        >
-          <h2>Countdown</h2>
-          <Countdown />
-        </TabPane>
-      </Tabs>
-    </div>
-  );
-}
+    <Tabs defaultActiveKey="2">
+      <TabPane
+        tab={(
+          <span>
+            <ClockCircleOutlined />
+            Timer
+          </span>
+        )}
+        key="1"
+      >
+        <h2>Timer</h2>
+        <Timer />
+      </TabPane>
+      <TabPane
+        tab={(
+          <span>
+            <RocketOutlined />
+            Countdown
+          </span>
+        )}
+        key="2"
+      >
+        <h2>Countdown</h2>
+        <Countdown />
+      </TabPane>
+    </Tabs>
+  </div>
+);
 
 export default App;
