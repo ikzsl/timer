@@ -1,8 +1,12 @@
 import React from 'react';
+import { Tabs } from 'antd';
+import { ClockCircleOutlined, RocketOutlined } from '@ant-design/icons';
 import logo from './logo.png';
 import './App.scss';
 import Timer from './components/Timer';
 import Countdown from './components/Countdown';
+
+const { TabPane } = Tabs;
 
 function App() {
   return (
@@ -11,8 +15,33 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Timer bla</h1>
       </header>
-      <Timer />
-      <Countdown />
+
+      <Tabs defaultActiveKey="2">
+        <TabPane
+          tab={(
+            <span>
+              <ClockCircleOutlined />
+              Timer
+            </span>
+          )}
+          key="1"
+        >
+          <h2>Timer</h2>
+          <Timer />
+        </TabPane>
+        <TabPane
+          tab={(
+            <span>
+              <RocketOutlined />
+              Countdown
+            </span>
+          )}
+          key="2"
+        >
+          <h2>Countdown</h2>
+          <Countdown />
+        </TabPane>
+      </Tabs>
     </div>
   );
 }

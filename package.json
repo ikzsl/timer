@@ -4,9 +4,11 @@
   "private": true,
   "homepage": "https://ikzsl.github.io/timer",
   "dependencies": {
+    "@ant-design/icons": "^4.1.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.2.0",
     "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -59,7 +61,6 @@
     "stylelint": "^13.3.1",
     "stylelint-config-recommended": "^3.0.0"
   },
-
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
