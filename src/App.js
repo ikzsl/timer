@@ -4,7 +4,6 @@ import './App.scss';
 import Timer from './components/Timer';
 import Countdown from './components/Countdown';
 
-
 function App() {
   return (
     <div className="App">
@@ -12,8 +11,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Timer bl</h1>
       </header>
-      <Timer/>
-      <Countdown/>
+      <Timer />
+      <Countdown />
     </div>
   );
 }
