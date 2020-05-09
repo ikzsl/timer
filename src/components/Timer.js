@@ -1,48 +1,77 @@
 import React from 'react';
-import {
-  Slider, InputNumber, Row, Col, Button,
-} from 'antd';
+import { Button } from 'antd';
+
+import './timer.scss';
 
 class Timer extends React.Component {
   state = {
-    inputValue: 1,
+    isPaused: true,
+    isStarted: false,
+    minutes: 0,
+    seconds: 0,
+    milliseconds: 0,
   };
 
-  onChange = (value) => {
+  onMainButtonClick = () => {
+    const { isPaused, isStarted } = this.state;
+    if (isStarted === false) {
+      this.setState({
+        isStarted: true,
+        milliseconds: Date.now(),
+      });
+    }
     this.setState({
-      inputValue: value,
+      isPaused: !isPaused,
     });
   };
 
+  onResetClick = () => {
+    const { isPaused } = this.state;
+
+    this.setState({
+      isPaused: true,
+    });
+
+    if (isPaused) {
+      this.setState({
+        isStarted: false,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
+      });
+    }
+  };
+
   render() {
-    const { inputValue } = this.state;
+    const {
+      isPaused, isStarted, minutes, seconds, milliseconds,
+    } = this.state;
+    const mainButtonLabel = isPaused ? 'Start' : 'Pause';
     return (
-      <Row>
-        <Col span={12}>
-          <Slider
-            min={1}
-            max={60}
-            onChange={this.onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
-          />
-        </Col>
-        <Col span={4}>
-          <InputNumber
-            min={1}
-            max={60}
-            style={{ margin: '0 16px' }}
-            value={inputValue}
-            onChange={this.onChange}
-          />
-        </Col>
-        <Col>
-          <Button type="primary">Button</Button>
-        </Col>
-      </Row>
+      <div className="container">
+        <div className="display">
+          <span>{minutes}</span>
+          <span>
+            :
+            {seconds}
+          </span>
+          <span>
+            :
+            {milliseconds}
+          </span>
+        </div>
+
+        <Button type="primary" onClick={this.onMainButtonClick} className="button">
+          {mainButtonLabel}
+        </Button>
+        {isStarted ? (
+          <Button type="primary" onClick={this.onResetClick}>
+            Reset
+          </Button>
+        ) : null}
+      </div>
     );
   }
 }
-
-// const Timer = () => ({ IntegerStep });
 
 export default Timer;

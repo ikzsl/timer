@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Slider, InputNumber, Row, Col, Button,
-} from 'antd';
+import { Slider, InputNumber, Button } from 'antd';
 
 class Countdown extends React.Component {
   state = {
@@ -24,52 +22,37 @@ class Countdown extends React.Component {
   render() {
     const { inputValue1, inputValue2 } = this.state;
     return (
-      <>
-        <Row>
-          <Col span={12}>
-            <Slider
-              min={1}
-              max={60}
-              onChange={this.onChange1}
-              value={typeof inputValue1 === 'number' ? inputValue1 : 0}
-            />
-          </Col>
-          <Col span={4}>
-            <InputNumber
-              min={1}
-              max={60}
-              style={{ margin: '0 16px' }}
-              value={inputValue1}
-              onChange={this.onChange1}
-            />
-          </Col>
-          <Col>
-            <Button type="primary">Button</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col span={12}>
-            <Slider
-              min={1}
-              max={60}
-              onChange={this.onChange2}
-              value={typeof inputValue2 === 'number' ? inputValue2 : 0}
-            />
-          </Col>
-          <Col span={4}>
-            <InputNumber
-              min={1}
-              max={60}
-              style={{ margin: '0 16px' }}
-              value={inputValue2}
-              onChange={this.onChange2}
-            />
-          </Col>
-          <Col>
-            <Button type="primary">Button</Button>
-          </Col>
-        </Row>
-      </>
+      <div className="container">
+        <Slider
+          min={1}
+          max={60}
+          onChange={this.onChange1}
+          value={typeof inputValue1 === 'number' ? inputValue1 : 0}
+        />
+        <InputNumber
+          min={1}
+          max={60}
+          style={{ margin: '0 16px' }}
+          value={inputValue1}
+          onChange={this.onChange1}
+        />
+        <Button type="primary">Button</Button>
+
+        <Slider
+          min={1}
+          max={60}
+          onChange={this.onChange2}
+          value={typeof inputValue2 === 'number' ? inputValue2 : 0}
+        />
+        <InputNumber
+          min={1}
+          max={60}
+          style={{ margin: '0 16px' }}
+          value={inputValue2}
+          onChange={this.onChange2}
+        />
+        <Button type="primary">Button</Button>
+      </div>
     );
   }
 }

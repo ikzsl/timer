@@ -15,7 +15,7 @@ const App = () => (
       <h1>Timer bla</h1>
     </header>
 
-    <Tabs defaultActiveKey="2">
+    <Tabs defaultActiveKey="1">
       <TabPane
         tab={(
           <span>
