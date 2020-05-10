@@ -12,7 +12,7 @@ const App = () => (
   <div className="App">
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1>Timer bla</h1>
+      <h1>Timer bl</h1>
     </header>
 
     <Tabs defaultActiveKey="1">

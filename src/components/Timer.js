@@ -7,7 +7,7 @@ class Timer extends React.Component {
   state = {
     isPaused: true,
     startTime: Date.now(),
-    period: 0,
+    period: '000',
     elapsedTime: 0,
   };
 
@@ -15,7 +15,7 @@ class Timer extends React.Component {
     const { isPaused } = this.state;
 
     if (isPaused === true) {
-      this.poll = setInterval(this.tick, 50);
+      this.poll = setInterval(this.tick, 57);
       this.setState({
         startTime: Date.now(),
       });
@@ -44,14 +44,16 @@ class Timer extends React.Component {
 
     if (isPaused === false) {
       clearInterval(this.poll);
-      this.setState({
+      this.setState((prevState) => ({
+        period: prevState.period,
+        elapsedTime: prevState.period,
         isPaused: true,
-      });
+      }));
     }
 
     if (isPaused === true) {
       this.setState({
-        period: 0,
+        period: '000',
         elapsedTime: 0,
       });
     }
@@ -67,18 +69,21 @@ class Timer extends React.Component {
     const { isPaused, period } = this.state;
 
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
+    const milliseconds = period.toString().slice(-3);
+    const seconds = Math.floor((period / 1000) % 60);
+    const minutes = Math.floor(((period / 1000) % (60 * 60)) / 60);
 
     return (
       <div className="container">
         <div className="display">
-          <span>{Math.floor(((period / 1000) % (60 * 60)) / 60) || 0}</span>
+          <span>{minutes < 10 ? `0${minutes}` : minutes}</span>
           <span>
             :
-            {Math.floor((period / 1000) % 60) || 0}
+            {seconds < 10 ? `0${seconds}` : seconds}
           </span>
           <span>
             :
-            {period.toString().slice(-3) || 0}
+            {milliseconds.length < 3 ? `0${milliseconds}` : milliseconds}
           </span>
         </div>
 
