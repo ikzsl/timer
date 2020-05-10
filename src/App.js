@@ -3,8 +3,8 @@ import { Tabs } from 'antd';
 import { ClockCircleOutlined, RocketOutlined } from '@ant-design/icons';
 import logo from './logo.png';
 import './App.scss';
-import Timer from './components/Timer';
-import Countdown from './components/Countdown';
+import Timer from './components/timer';
+import Countdown from './components/countdown';
 
 const { TabPane } = Tabs;
 
