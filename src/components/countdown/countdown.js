@@ -1,8 +1,16 @@
 import React from 'react';
 import { Button, Progress } from 'antd';
+import { Howl } from 'howler';
 import CountdownInput from '../countdown-input/countdown-input';
 
 import './countdown.scss';
+
+import clip from './countdown.mp3';
+
+const sound = new Howl({
+  src: [clip],
+  loop: true,
+});
 
 class Countdown extends React.Component {
   state = {
@@ -71,6 +79,7 @@ class Countdown extends React.Component {
     const { period, inputValue1 } = this.state;
     if (period >= inputValue1) {
       clearInterval(this.poll);
+      sound.play();
     }
     this.setState((prevState) => ({
       period: Math.floor(prevState.elapsedTime + (Date.now() - prevState.startTime) / 1000),
@@ -85,9 +94,7 @@ class Countdown extends React.Component {
       <div className="countdown-container">
         <div className="countdown-result">
           <div className="display">
-            {`${Math.floor((inputValue1 - period) / 60)}:${
-              (inputValue1 - period) % 60
-            }`}
+            {`${Math.floor((inputValue1 - period) / 60)}:${(inputValue1 - period) % 60}`}
           </div>
           <Progress type="circle" percent={Math.floor((100 * period) / inputValue1)} />
         </div>
