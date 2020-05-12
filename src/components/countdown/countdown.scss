@@ -1,0 +1,29 @@
+.countdown-container {
+  position: relative;
+  border: 2px solid green;
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+
+  &::before {
+    content: 'c-container';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.countdown-result {
+  position: relative;
+  border: 2px solid green;
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+
+  &::before {
+    content: 'c-result';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

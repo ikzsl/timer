@@ -3,8 +3,8 @@ import { Tabs } from 'antd';
 import { ClockCircleOutlined, RocketOutlined } from '@ant-design/icons';
 import logo from './logo.png';
 import './App.scss';
-import Timer from './components/timer';
-import Countdown from './components/countdown';
+import Timer from './components/timer/timer';
+import Countdown from './components/countdown/countdown';
 
 const { TabPane } = Tabs;
 
@@ -12,10 +12,9 @@ const App = () => (
   <div className="App">
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <h1>Timer bl</h1>
     </header>
 
-    <Tabs defaultActiveKey="1">
+    <Tabs defaultActiveKey="2">
       <TabPane
         tab={(
           <span>

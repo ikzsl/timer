@@ -1,14 +1,22 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Progress } from 'antd';
+import CountdownInput from '../countdown-input/countdown-input';
 
-import './timer.scss';
+import './countdown.scss';
 
-class Timer extends React.Component {
+class Countdown extends React.Component {
   state = {
+    inputValue1: 0,
     isPaused: true,
     startTime: Date.now(),
     period: '000',
     elapsedTime: 0,
+  };
+
+  onInputChange = (value) => {
+    this.setState({
+      inputValue1: value,
+    });
   };
 
   onMainButtonClick = () => {
@@ -60,33 +68,30 @@ class Timer extends React.Component {
   };
 
   tick = () => {
+    const { period, inputValue1 } = this.state;
+    if (period >= inputValue1) {
+      clearInterval(this.poll);
+    }
     this.setState((prevState) => ({
-      period: prevState.elapsedTime + (Date.now() - prevState.startTime),
+      period: Math.floor(prevState.elapsedTime + (Date.now() - prevState.startTime) / 1000),
     }));
   };
 
   render() {
-    const { isPaused, period } = this.state;
-
+    const { isPaused, inputValue1, period } = this.state;
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
-    const milliseconds = period.toString().slice(-3);
-    const seconds = Math.floor((period / 1000) % 60);
-    const minutes = Math.floor(((period / 1000) % (60 * 60)) / 60);
 
     return (
-      <div className="container">
-        <div className="display">
-          <span>{minutes < 10 ? `0${minutes}` : minutes}</span>
-          <span>
-            :
-            {seconds < 10 ? `0${seconds}` : seconds}
-          </span>
-          <span>
-            :
-            {milliseconds.length < 3 ? `0${milliseconds}` : milliseconds}
-          </span>
+      <div className="countdown-container">
+        <div className="countdown-result">
+          <div className="display">
+            {`${Math.floor((inputValue1 - period) / 60)}:${
+              (inputValue1 - period) % 60
+            }`}
+          </div>
+          <Progress type="circle" percent={Math.floor((100 * period) / inputValue1)} />
         </div>
-
+        <CountdownInput inputValue1={inputValue1} onInputChange={this.onInputChange} />
         <Button type="primary" onClick={this.onMainButtonClick} className="button">
           {mainButtonLabel}
         </Button>
@@ -98,4 +103,4 @@ class Timer extends React.Component {
   }
 }
 
-export default Timer;
+export default Countdown;
