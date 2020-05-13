@@ -18,6 +18,7 @@ const CountdownInput = (props) => {
   return (
     <div className="countdown-input-container">
       <InputNumber
+        type="number"
         disabled={!isStopped}
         min={0}
         max={720}
@@ -26,6 +27,7 @@ const CountdownInput = (props) => {
         onChange={onMinutesInputChange}
       />
       <InputNumber
+        type="number"
         disabled={!isStopped}
         min={0}
         max={59}
