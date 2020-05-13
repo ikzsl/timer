@@ -14,16 +14,34 @@ const sound = new Howl({
 
 class Countdown extends React.Component {
   state = {
-    inputValue1: 0,
+    minutes: 0,
+    seconds: 0,
+    totalSeconds: 0,
     isPaused: true,
     startTime: Date.now(),
     period: '000',
     elapsedTime: 0,
   };
 
-  onInputChange = (value) => {
+  onMinutesInputChange = (value) => {
+    this.setState((prevState) => ({
+      minutes: value,
+      totalSeconds: value * 60 + prevState.seconds,
+    }));
+  };
+
+  onSecondsInputChange = (value) => {
+    this.setState((prevState) => ({
+      seconds: value,
+      totalSeconds: prevState.minutes * 60 + value,
+    }));
+  };
+
+  onSliderChange = (value) => {
     this.setState({
-      inputValue1: value,
+      totalSeconds: value,
+      minutes: Math.floor(value / 60),
+      seconds: value % 60,
     });
   };
 
@@ -76,8 +94,8 @@ class Countdown extends React.Component {
   };
 
   tick = () => {
-    const { period, inputValue1 } = this.state;
-    if (period >= inputValue1) {
+    const { period, totalSeconds } = this.state;
+    if (period >= totalSeconds) {
       clearInterval(this.poll);
       sound.play();
     }
@@ -87,7 +105,9 @@ class Countdown extends React.Component {
   };
 
   render() {
-    const { isPaused, inputValue1, period } = this.state;
+    const {
+      isPaused, inputValue1, period, totalSeconds, minutes, seconds,
+    } = this.state;
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
 
     return (
@@ -98,7 +118,14 @@ class Countdown extends React.Component {
           </div>
           <Progress type="circle" percent={Math.floor((100 * period) / inputValue1)} />
         </div>
-        <CountdownInput inputValue1={inputValue1} onInputChange={this.onInputChange} />
+        <CountdownInput
+          minutes={minutes}
+          seconds={seconds}
+          totalSeconds={totalSeconds}
+          onMinutesInputChange={this.onMinutesInputChange}
+          onSecondsInputChange={this.onSecondsInputChange}
+          onSliderChange={this.onSliderChange}
+        />
         <Button type="primary" onClick={this.onMainButtonClick} className="button">
           {mainButtonLabel}
         </Button>

@@ -9,6 +9,7 @@ class Timer extends React.Component {
     startTime: Date.now(),
     period: '000',
     elapsedTime: 0,
+    isStopped: true,
   };
 
   onMainButtonClick = () => {
@@ -18,6 +19,7 @@ class Timer extends React.Component {
       this.poll = setInterval(this.tick, 57);
       this.setState({
         startTime: Date.now(),
+        isStopped: false,
       });
 
       this.setState((prevState) => ({
@@ -55,6 +57,7 @@ class Timer extends React.Component {
       this.setState({
         period: '000',
         elapsedTime: 0,
+        isStopped: true,
       });
     }
   };
@@ -66,7 +69,7 @@ class Timer extends React.Component {
   };
 
   render() {
-    const { isPaused, period } = this.state;
+    const { isPaused, period, isStopped } = this.state;
 
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
     const milliseconds = period.toString().slice(-3);
@@ -91,7 +94,7 @@ class Timer extends React.Component {
           {mainButtonLabel}
         </Button>
         <Button type="primary" onClick={this.onResetClick} className="button">
-          Reset
+          {isStopped ? null : 'Reset'}
         </Button>
       </div>
     );
