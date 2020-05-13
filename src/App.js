@@ -14,7 +14,7 @@ const App = () => (
       <img src={logo} className="App-logo" alt="logo" />
     </header>
 
-    <Tabs defaultActiveKey="2">
+    <Tabs defaultActiveKey="1">
       <TabPane
         tab={(
           <span>
