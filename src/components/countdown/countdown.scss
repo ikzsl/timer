@@ -1,28 +1,12 @@
 .countdown-container {
   position: relative;
-  border: 1px solid gray;
   max-width: 400px;
   margin: 0 auto;
-
-  &::before {
-    content: 'c-container';
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }
 
 .countdown-result {
   position: relative;
-  border: 1px solid gray;
   width: 50%;
   margin: 0 auto;
   padding: 10px;
-
-  &::before {
-    content: 'c-result';
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }

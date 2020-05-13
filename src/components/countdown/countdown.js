@@ -18,8 +18,9 @@ class Countdown extends React.Component {
     seconds: 0,
     totalSeconds: 0,
     isPaused: true,
+    isStopped: true,
     startTime: Date.now(),
-    period: '000',
+    period: 0,
     elapsedTime: 0,
   };
 
@@ -52,6 +53,7 @@ class Countdown extends React.Component {
       this.poll = setInterval(this.tick, 57);
       this.setState({
         startTime: Date.now(),
+        isStopped: false,
       });
 
       this.setState((prevState) => ({
@@ -86,9 +88,14 @@ class Countdown extends React.Component {
     }
 
     if (isPaused === true) {
+      sound.stop();
       this.setState({
-        period: '000',
+        isStopped: true,
+        period: 0,
         elapsedTime: 0,
+        totalSeconds: 0,
+        seconds: 0,
+        minutes: 0,
       });
     }
   };
@@ -97,6 +104,11 @@ class Countdown extends React.Component {
     const { period, totalSeconds } = this.state;
     if (period >= totalSeconds) {
       clearInterval(this.poll);
+
+      this.setState({
+        isPaused: true,
+        period: 0,
+      });
       sound.play();
     }
     this.setState((prevState) => ({
@@ -106,19 +118,35 @@ class Countdown extends React.Component {
 
   render() {
     const {
-      isPaused, inputValue1, period, totalSeconds, minutes, seconds,
+      isPaused, isStopped, period, totalSeconds, minutes, seconds,
     } = this.state;
+    const displayMinutes = Math.floor((totalSeconds - period) / 60);
+    const displaySeconds = (totalSeconds - period) % 60;
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
+    const resetButton = (
+      <Button
+        shape="round"
+        size="large"
+        type="primary"
+        onClick={this.onResetClick}
+        className="button"
+      >
+        Reset
+      </Button>
+    );
 
     return (
       <div className="countdown-container">
         <div className="countdown-result">
+          <Progress type="circle" percent={Math.floor((100 * period) / totalSeconds)} />
           <div className="display">
-            {`${Math.floor((inputValue1 - period) / 60)}:${(inputValue1 - period) % 60}`}
+            {`${displayMinutes < 10 ? `0${displayMinutes}` : displayMinutes}:${
+              displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds
+            }`}
           </div>
-          <Progress type="circle" percent={Math.floor((100 * period) / inputValue1)} />
         </div>
         <CountdownInput
+          isStopped={isStopped}
           minutes={minutes}
           seconds={seconds}
           totalSeconds={totalSeconds}
@@ -126,12 +154,17 @@ class Countdown extends React.Component {
           onSecondsInputChange={this.onSecondsInputChange}
           onSliderChange={this.onSliderChange}
         />
-        <Button type="primary" onClick={this.onMainButtonClick} className="button">
+        <Button
+          disabled={!(totalSeconds - period)}
+          shape="round"
+          size="large"
+          type="primary"
+          onClick={this.onMainButtonClick}
+          className="button"
+        >
           {mainButtonLabel}
         </Button>
-        <Button type="primary" onClick={this.onResetClick} className="button">
-          Reset
-        </Button>
+        {isStopped ? null : resetButton}
       </div>
     );
   }

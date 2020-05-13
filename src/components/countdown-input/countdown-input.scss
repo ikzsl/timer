@@ -1,13 +1,5 @@
 .countdown-input-container {
   position: relative;
-  border: 1px solid gray;
   margin: 0 auto;
   padding: 20px;
-
-  &::before {
-    content: 'c-input';
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 }

@@ -6,6 +6,7 @@ import './countdown-input.scss';
 
 const CountdownInput = (props) => {
   const {
+    isStopped,
     minutes,
     seconds,
     totalSeconds,
@@ -17,6 +18,7 @@ const CountdownInput = (props) => {
   return (
     <div className="countdown-input-container">
       <InputNumber
+        disabled={!isStopped}
         min={0}
         max={720}
         style={{ margin: '0 16px' }}
@@ -24,13 +26,15 @@ const CountdownInput = (props) => {
         onChange={onMinutesInputChange}
       />
       <InputNumber
+        disabled={!isStopped}
         min={0}
-        max={60}
+        max={59}
         style={{ margin: '0 16px' }}
         value={seconds}
         onChange={onSecondsInputChange}
       />
       <Slider
+        disabled={!isStopped}
         tooltipVisible={false}
         step={15}
         min={0}
@@ -43,6 +47,7 @@ const CountdownInput = (props) => {
 };
 
 CountdownInput.defaultProps = {
+  isStopped: true,
   minutes: 0,
   seconds: 0,
   totalSeconds: 0,
@@ -52,6 +57,7 @@ CountdownInput.defaultProps = {
 };
 
 CountdownInput.propTypes = {
+  isStopped: PropTypes.bool,
   minutes: PropTypes.number,
   seconds: PropTypes.number,
   totalSeconds: PropTypes.number,

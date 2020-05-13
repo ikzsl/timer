@@ -75,6 +75,17 @@ class Timer extends React.Component {
     const milliseconds = period.toString().slice(-3);
     const seconds = Math.floor((period / 1000) % 60);
     const minutes = Math.floor(((period / 1000) % (60 * 60)) / 60);
+    const resetButton = (
+      <Button
+        shape="round"
+        size="large"
+        type="primary"
+        onClick={this.onResetClick}
+        className="button"
+      >
+        Reset
+      </Button>
+    );
 
     return (
       <div className="timer-container">
@@ -90,12 +101,17 @@ class Timer extends React.Component {
           </span>
         </div>
 
-        <Button type="primary" onClick={this.onMainButtonClick} className="button">
+        <Button
+          shape="round"
+          size="large"
+          type="primary"
+          onClick={this.onMainButtonClick}
+          className="button"
+        >
           {mainButtonLabel}
         </Button>
-        <Button type="primary" onClick={this.onResetClick} className="button">
-          {isStopped ? null : 'Reset'}
-        </Button>
+
+        {isStopped ? null : resetButton}
       </div>
     );
   }
