@@ -2,6 +2,11 @@ import React from 'react';
 import { Button, Progress } from 'antd';
 import { Howl } from 'howler';
 import CountdownInput from '../countdown-input/countdown-input';
+import {
+  calculateDisplayMinutes,
+  calculateDisplaySeconds,
+  calculateProgress,
+} from '../../utils/utils';
 
 import './countdown.scss';
 
@@ -109,8 +114,8 @@ class Countdown extends React.Component {
     const {
       isPaused, isStopped, period, totalSeconds, minutes, seconds,
     } = this.state;
-    const displayMinutes = Math.floor((totalSeconds - period) / 60);
-    const displaySeconds = (totalSeconds - period) % 60;
+    const displayMinutes = calculateDisplayMinutes(totalSeconds, period);
+    const displaySeconds = calculateDisplaySeconds(totalSeconds, period);
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
     const resetButton = (
       <Button
@@ -127,7 +132,7 @@ class Countdown extends React.Component {
     return (
       <div className="countdown-container">
         <div className="countdown-result">
-          <Progress type="circle" percent={Math.floor((100 * period) / totalSeconds)} />
+          <Progress type="circle" percent={calculateProgress(totalSeconds, period)} />
           <div className="display">
             {`${displayMinutes < 10 ? `0${displayMinutes}` : displayMinutes}:${
               displaySeconds < 10 ? `0${displaySeconds}` : displaySeconds

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'antd';
 
+import { millisecondsDevider, secondsDevider, minutesDevider } from '../../utils/utils';
+
 import './timer.scss';
 
 class Timer extends React.Component {
@@ -61,9 +63,9 @@ class Timer extends React.Component {
     const { isPaused, period, isStopped } = this.state;
 
     const mainButtonLabel = isPaused ? 'Start' : 'Pause';
-    const milliseconds = period.toString().slice(-3);
-    const seconds = Math.floor((period / 1000) % 60);
-    const minutes = Math.floor(((period / 1000) % (60 * 60)) / 60);
+    const milliseconds = millisecondsDevider(period);
+    const seconds = secondsDevider(period);
+    const minutes = minutesDevider(period);
     const resetButton = (
       <Button
         shape="round"
