@@ -26,6 +26,7 @@ const CountdownInput = (props) => {
         value={minutes}
         onChange={onMinutesInputChange}
       />
+      :
       <InputNumber
         type="number"
         disabled={!isStopped}

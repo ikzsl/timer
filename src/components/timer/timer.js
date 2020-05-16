@@ -42,24 +42,13 @@ class Timer extends React.Component {
   };
 
   onResetClick = () => {
-    const { isPaused } = this.state;
-
-    if (isPaused === false) {
-      clearInterval(this.poll);
-      this.setState((prevState) => ({
-        period: prevState.period,
-        elapsedTime: prevState.period,
-        isPaused: true,
-      }));
-    }
-
-    if (isPaused === true) {
-      this.setState({
-        period: '000',
-        elapsedTime: 0,
-        isStopped: true,
-      });
-    }
+    clearInterval(this.poll);
+    this.setState({
+      period: '000',
+      elapsedTime: 0,
+      isStopped: true,
+      isPaused: true,
+    });
   };
 
   tick = () => {
@@ -100,18 +89,19 @@ class Timer extends React.Component {
             {milliseconds.length < 3 ? `0${milliseconds}` : milliseconds}
           </span>
         </div>
+        <div className="buttons">
+          <Button
+            shape="round"
+            size="large"
+            type="primary"
+            onClick={this.onMainButtonClick}
+            className="button"
+          >
+            {mainButtonLabel}
+          </Button>
 
-        <Button
-          shape="round"
-          size="large"
-          type="primary"
-          onClick={this.onMainButtonClick}
-          className="button"
-        >
-          {mainButtonLabel}
-        </Button>
-
-        {isStopped ? null : resetButton}
+          {isStopped ? null : resetButton}
+        </div>
       </div>
     );
   }

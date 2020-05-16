@@ -76,28 +76,17 @@ class Countdown extends React.Component {
   };
 
   onResetClick = () => {
-    const { isPaused } = this.state;
-
-    if (isPaused === false) {
-      clearInterval(this.poll);
-      this.setState((prevState) => ({
-        period: prevState.period,
-        elapsedTime: prevState.period,
-        isPaused: true,
-      }));
-    }
-
-    if (isPaused === true) {
-      sound.stop();
-      this.setState({
-        isStopped: true,
-        period: 0,
-        elapsedTime: 0,
-        totalSeconds: 0,
-        seconds: 0,
-        minutes: 0,
-      });
-    }
+    clearInterval(this.poll);
+    sound.stop();
+    this.setState({
+      isStopped: true,
+      isPaused: true,
+      period: 0,
+      elapsedTime: 0,
+      totalSeconds: 0,
+      seconds: 0,
+      minutes: 0,
+    });
   };
 
   tick = () => {
