@@ -8,8 +8,12 @@ const CountdownInput = (props) => {
   const {
     isStopped,
     minutes,
+    minutesMax,
     seconds,
+    secondsMax,
     totalSeconds,
+    sliderMax,
+    sliderStep,
     onMinutesInputChange,
     onSecondsInputChange,
     onSliderChange,
@@ -21,7 +25,7 @@ const CountdownInput = (props) => {
         type="number"
         disabled={!isStopped}
         min={0}
-        max={720}
+        max={minutesMax}
         style={{ margin: '0 16px' }}
         value={minutes}
         onChange={onMinutesInputChange}
@@ -31,7 +35,7 @@ const CountdownInput = (props) => {
         type="number"
         disabled={!isStopped}
         min={0}
-        max={59}
+        max={secondsMax}
         style={{ margin: '0 16px' }}
         value={seconds}
         onChange={onSecondsInputChange}
@@ -39,11 +43,11 @@ const CountdownInput = (props) => {
       <Slider
         disabled={!isStopped}
         tooltipVisible={false}
-        step={15}
+        step={sliderStep}
         min={0}
-        max={3600}
+        max={sliderMax}
         onChange={onSliderChange}
-        value={typeof totalSeconds === 'number' ? totalSeconds : 0}
+        value={totalSeconds || 0}
       />
     </div>
   );
@@ -52,21 +56,26 @@ const CountdownInput = (props) => {
 CountdownInput.defaultProps = {
   isStopped: true,
   minutes: 0,
+  minutesMax: 0,
   seconds: 0,
+  secondsMax: 0,
   totalSeconds: 0,
-  onMinutesInputChange: () => {},
-  onSecondsInputChange: () => {},
-  onSliderChange: () => {},
+  sliderMax: 0,
+  sliderStep: 0,
 };
 
 CountdownInput.propTypes = {
   isStopped: PropTypes.bool,
   minutes: PropTypes.number,
+  minutesMax: PropTypes.number,
   seconds: PropTypes.number,
+  secondsMax: PropTypes.number,
   totalSeconds: PropTypes.number,
-  onMinutesInputChange: PropTypes.func,
-  onSecondsInputChange: PropTypes.func,
-  onSliderChange: PropTypes.func,
+  sliderMax: PropTypes.number,
+  sliderStep: PropTypes.number,
+  onMinutesInputChange: PropTypes.func.isRequired,
+  onSecondsInputChange: PropTypes.func.isRequired,
+  onSliderChange: PropTypes.func.isRequired,
 };
 
 export default CountdownInput;

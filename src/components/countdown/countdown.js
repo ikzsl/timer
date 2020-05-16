@@ -142,8 +142,12 @@ class Countdown extends React.Component {
         <CountdownInput
           isStopped={isStopped}
           minutes={minutes}
+          minutesMax={720}
           seconds={seconds}
+          secondsMax={59}
           totalSeconds={totalSeconds}
+          sliderMax={3600}
+          sliderStep={15}
           onMinutesInputChange={this.onMinutesInputChange}
           onSecondsInputChange={this.onSecondsInputChange}
           onSliderChange={this.onSliderChange}
