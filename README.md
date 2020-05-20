@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Насладиться тиканьем таймера можно здесь [Timer](https://ikzsl.github.io/timer/).
 
 ## Available Scripts
 
