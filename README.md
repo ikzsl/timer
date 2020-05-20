@@ -1,4 +1,4 @@
-Насладиться тиканьем таймера можно здесь [Timer](https://ikzsl.github.io/timer/).
+Насладиться тиканьем таймера можно [здесь](https://ikzsl.github.io/timer/).
 
 ## Available Scripts
 
