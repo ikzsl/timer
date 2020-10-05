@@ -2,7 +2,7 @@
 
 Секундомер/таймер обратного отсчета.
 
-In the project directory, you can run:
+
 
 ### `npm start`
 
