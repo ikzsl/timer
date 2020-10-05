@@ -1,5 +1,7 @@
 Готовый таймер можно потыкать [здесь](https://ikzsl.github.io/timer/).
 
+Секундомер/таймер обратного отсчета.
+
 In the project directory, you can run:
 
 ### `npm start`
